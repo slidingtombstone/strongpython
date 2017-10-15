@@ -1,6 +1,7 @@
 #!/bin/sh
 
-CIDFILE=$(tcid.sh) &&
+sshd &&
+    CIDFILE=$(tcid) &&
     docker \
         container \
         create \
