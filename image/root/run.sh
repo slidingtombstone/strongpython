@@ -9,6 +9,6 @@ apk update &&
     mkdir /home/user/bin &&
     cp /opt/docker/docker.sh /home/user/bin/docker &&
     chmod 0500 /home/user/bin/docker &&
-    cp /opt/docker/bash_profile.txt /home/user/.profile &&
-    chown -R user:user /home/user/bin /home/user/.profile &&
+    cp /opt/docker/bash_profile.txt /home/user/.bashrc &&
+    chown -R user:user /home/user/bin /home/user/.bashrc &&
     rm -rf /var/cache/apk/*
