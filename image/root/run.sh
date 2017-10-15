@@ -2,7 +2,7 @@
 
 apk update &&
     apk upgrade &&
-    apk add --no-cache bash sudo util-linux &&
+    apk add --no-cache bash sudo util-linux openssh &&
     adduser -D user &&
     cp /opt/docker/sudo.txt /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
@@ -17,6 +17,7 @@ apk update &&
     for COMMAND in containers images networks secrets services stacks swarms volumes
     do
         mkdir /home/user/docker/${COMMAND}
-    done
-    chown -R user:user /home/user/bin /home/user/.bashrc /home/user/docker &&
+    done &&
+    mkdir /home/user/data &&
+    chown -R user:user /home/user/bin /home/user/.bashrc /home/user/docker /home/user/data &&
     rm -rf /var/cache/apk/*
