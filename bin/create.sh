@@ -3,7 +3,9 @@
 docker \
     container \
     create \
-    --interactive \
+    --name strongpython \
     --tty \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
-    slidingtombstone/strongpython:$(git rev-parse --verify HEAD)
+    --restart always \
+    slidingtombstone/strongpython:$(git rev-parse --verify HEAD) &&
+    docker container start strongpython
