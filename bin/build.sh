@@ -13,5 +13,5 @@ then
     echo There are untracked files that are not ignored &&
         exit 66
 else
-    docker image build --tag slidingtombstone/strongpython:$(git rev-parse --verify HEAD)
+    docker image build --tag slidingtombstone/strongpython:$(git rev-parse --verify HEAD) image
 fi
