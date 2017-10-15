@@ -11,6 +11,6 @@ clean(){
             rm -f ${HOME}/docker/${1}s/${FILE}
     done
 } &&
-    clean containers &&
-    clean volumes &&
-    clean networks
+    clean container &&
+    clean volume &&
+    clean network

@@ -4,9 +4,9 @@ if [ ! -f /home/user/docker/networks/system ]
 then
     docker network create $(uuidgen) > /home/user/docker/networks/system
 fi &&
-if [ ! -f ${HOME}/docker/volumes/sshd-config ]
+if [ ! -f ${HOME}/docker/volumes/sshd_config ]
     then
-        docker volume create > ${HOME}/docker/volumes/sshd-config &&
+        docker volume create > ${HOME}/docker/volumes/sshd_config &&
             cat \
                 /opt/docker/etc/sshd_config.txt | docker \
                 container \
@@ -20,7 +20,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd-config ]
     fi &&
     if [ ! -f ${HOME}/docker/volumes/sshd_dot_ssh ]
     then
-        docker volume create > ${HOME}/docker/volumes/sshd-dot_ssh &&
+        docker volume create > ${HOME}/docker/volumes/sshd_dot_ssh &&
             docker \
                 container \
                 run \
