@@ -14,7 +14,7 @@ apk update &&
     done &&
     cp /opt/docker/bashrc.txt /home/user/.bashrc &&
     mkdir /home/user/docker &&
-    echo containers images networks secrets services stacks swarms volumes | while read COMMAND
+    for COMMAND in containers images networks secrets services stacks swarms volumes
     do
         mkdir /home/user/docker/${COMMAND}
     done
