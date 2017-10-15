@@ -12,8 +12,6 @@ apk update &&
         cp /opt/docker/bin/${FILE} /home/user/bin/${FILE%.*} &&
             chmod 0500 /home/user/bin/${FILE%.*}
     done &&
-    cp /opt/docker/docker.sh /home/user/bin/docker &&
-    chmod 0500 /home/user/bin/docker &&
     cp /opt/docker/bashrc.txt /home/user/.bashrc &&
     chown -R user:user /home/user/bin /home/user/.bashrc &&
     rm -rf /var/cache/apk/*
