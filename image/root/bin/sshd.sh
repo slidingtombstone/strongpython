@@ -55,7 +55,8 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
             --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_config),destination=/etc/ssh \
             --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_dot_ssh),destination=/root/.ssh \
             rastasheep/ubuntu-sshd:14.04 \
-                sshd \
+                /entry.sh \
+                /usr/sbin/sshd \
                 -D \
                 -f /etc/ssh/sshd_config &&
             docker network connect --alias sshd $(cat ${HOME}/docker/networks/system) $(cat ${HOME}/docker/containers/sshd) &&
