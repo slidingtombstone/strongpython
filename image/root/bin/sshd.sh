@@ -39,9 +39,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 --interactive \
                 --tty \
                 --user root \
-                $(cat ${HOME}/docker/containers/sshd) \
-                    touch \ 
-                    /root/.ssh/authorized_keys &&
+                $(cat ${HOME}/docker/containers/sshd) touch /root/.ssh/authorized_keys &&
             # docker \
             #     container \
             #     exec \
