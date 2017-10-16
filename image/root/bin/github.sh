@@ -3,6 +3,7 @@
 export GROUP_NAME="${1}" &&
     export PROJECT_NAME="${2}" &&
     export WORKSPACE_NAME="${3}" &&
+    export MASTER_BRANCH="${4}" &&
     sshd &&
     export USER_NAME &&
     export USER_EMAIL &&
@@ -21,6 +22,7 @@ export GROUP_NAME="${1}" &&
         --env SSHD_PORT=${SSHD_PORT} \
         --env USER_NAME="${USER_NAME}" \
         --env USER_EMAIL="${USER_EMAIL}" \
+        --env MASTER_BRANCH="${MASTER_BRANCH}"
         slidingtombstone/developer:4c2ba7914649969517a2fa35417a7b78e9aff678 &&
     docker network connect --alias ${WORKSPACE_NAME} $(cat ${HOME}/docker/networks/system) $(cat ${CIDFILE}) &&
     docker network connect --alias ${WORKSPACE_NAME} entrypoint_default $(cat ${CIDFILE}) &&
@@ -32,4 +34,6 @@ export GROUP_NAME="${1}" &&
     echo "${GITHUB_ID_RSA}" | docker container exec --interactive $(cat ${CIDFILE}) tee /home/user/.ssh/id_rsa &&
     echo "${KNOWN_HOSTS}" | docker container exec --interactive $(cat ${CIDFILE}) tee /home/user/.ssh/known_hosts &&
     docker container exec --interactive --tty $(cat ${CIDFILE}) chmod 0600 /home/user/.ssh/id_rsa /home/user/.ssh/known_hosts &&
-    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project remote add origin git@github.com:${GROUP_NAME}/${PROJECT_NAME}.git
+    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project remote add origin git@github.com:${GROUP_NAME}/${PROJECT_NAME}.git &&
+    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project remote add upstream git@github.com:${GROUP_NAME}/${PROJECT_NAME}.git &&
+    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project git remote set-url --push upstream no_push &&
