@@ -32,27 +32,6 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 -f /etc/ssh/sshd_config &&
             docker network connect --alias sshd $(cat ${HOME}/docker/networks/system) $(cat ${HOME}/docker/containers/sshd) &&
             docker container start $(cat ${HOME}/docker/containers/sshd) &&
-            echo ALPHA 00100 &&
-            docker \
-                container \
-                exec \
-                --interactive \
-                --tty \
-                --user root \
-                $(cat ${HOME}/docker/containers/sshd) \
-                    mkdir \ 
-                    /root/.ssh &&
-            echo ALPHA 00200 &&
-            docker \
-                container \
-                exec \
-                --interactive \
-                --tty \
-                --user root \
-                $(cat ${HOME}/docker/containers/sshd) \
-                    chmod \
-                    0700 \
-                    /root/.ssh &&
             echo ALPHA 00300 &&
             docker \
                 container \
