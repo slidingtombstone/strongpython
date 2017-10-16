@@ -10,6 +10,8 @@ docker \
     --env USER_EMAIL \
     --env GITHUB_ID_RSA="$(cat ${HOME}/.ssh/id_rsa)" \
     --env KNOWN_HOSTS="$(cat ${HOME}/.ssh/known_hosts)" \
+    --env DISPLAY \
+    --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
     --restart always \
     slidingtombstone/strongpython:$(git rev-parse --verify HEAD) &&
     docker container start strongpython
