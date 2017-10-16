@@ -32,7 +32,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 -f /etc/ssh/sshd_config &&
             docker network connect --alias sshd $(cat ${HOME}/docker/networks/system) $(cat ${HOME}/docker/containers/sshd) &&
             docker container start $(cat ${HOME}/docker/containers/sshd) &&
-            sleep 10s &&
+            sleep 3s &&
             docker \
                 container \
                 exec \
@@ -40,15 +40,11 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 --tty \
                 --user root \
                 $(cat ${HOME}/docker/containers/sshd) touch /root/.ssh/authorized_keys &&
-            # docker \
-            #     container \
-            #     exec \
-            #     --interactive \
-            #     --tty \
-            #     --user root \
-            #     $(cat ${HOME}/docker/containers/sshd) \
-            #         chmod \
-            #         0600 \
-            #         /root/.ssh/authorized_keys &&
-            true
+            docker \
+                container \
+                exec \
+                --interactive \
+                --tty \
+                --user root \
+                $(cat ${HOME}/docker/containers/sshd) chmod 0600 /root/.ssh/authorized_keys
     fi
