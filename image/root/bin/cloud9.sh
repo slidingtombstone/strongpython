@@ -1,12 +1,14 @@
 #!/bin/sh
 
 sshd &&
+    export USER_NAME &&
+    export USER_EMAIL &&
     if [ ! -f ${HOME}/data/sshd.counter ]
     then
         echo $((${RANDOM}%10000+20000)) > ${HOME}/data/sshd.counter
     fi &&
     CIDFILE=$(tcid) &&
-    SSHD_PORT=$(cat ${HOME}/data/sshd.counter) &&
+    export SSHD_PORT=$(cat ${HOME}/data/sshd.counter) &&
     echo $((${SSHD_PORT}+1)) > ${HOME}/data/sshd.counter &&
     docker \
         container \
@@ -14,7 +16,7 @@ sshd &&
         --cidfile ${CIDFILE} \
         --env WORKSPACE_NAME=${1} \
         --env SSHD_CONTAINER=$(cat ${HOME}/docker/containers/sshd) \
-        --env SSHD_PORT= \
+        --env SSHD_PORT \
         --env USER_NAME \
         --env USER_EMAIL \
         slidingtombstone/developer:4c2ba7914649969517a2fa35417a7b78e9aff678 &&
