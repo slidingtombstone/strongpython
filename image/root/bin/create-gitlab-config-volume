@@ -13,7 +13,7 @@ then
             mkdir \
             ssl &&
         cat \
-            /opt/docker/openssl.txt | docker \
+            /opt/docker/etc/gitlab.ssl.txt | docker \
             container \
             run \
             --interactive \
