@@ -26,7 +26,6 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
             --restart always \
             --cidfile ${HOME}/docker/containers/sshd \
             --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_config),destination=/etc/ssh \
-            --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_dot_ssh),destination=/root/.ssh \
             rastasheep/ubuntu-sshd:14.04 \
                 /usr/sbin/sshd \
                 -D \
