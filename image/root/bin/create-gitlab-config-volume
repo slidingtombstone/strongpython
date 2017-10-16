@@ -1,2 +1,46 @@
 #!/bin/sh
 
+if [ ! -f ${HOME}/docker/volumes/gitlab-config ]
+then
+    docker \
+        container \
+        run \
+        --interactive \
+        --rm \
+        --mount type=volume,source=gitlab-config,destination=/etc/gitlab \
+        --workdir /etc/gitlab \
+        alpine:3.4 \
+            mkdir \
+            ssl &&
+        cat \
+            /opt/docker/openssl.txt | docker \
+            container \
+            run \
+            --interactive \
+            --rm \
+            --mount type=volume,source=gitlab-config,destination=/etc/gitlab \
+            --workdir /etc/gitlab/ssl \
+            jordi/openssl \
+                openssl \
+                req -x509 \
+                -newkey rsa:4096 \
+                -keyout gitlab.key \
+                -out gitlab.crt \
+                -days 365 \
+                -nodes &&
+        sed \
+            -e "s#d8b207ab-5e71-4b6e-bd6a-aa14dec16443#${AWS_DEFAULT_REGION}#g" \
+            -e "s#0b37a2a1-00cb-4145-a3a2-bb1490fb5c4e#${AWS_ACCESS_KEY_ID}#g" \
+            -e "s#3901d14f-6aee-4d23-8894-36ec77749b57#${AWS_SECRET_ACCESS_KEY}#g" \
+            -e "s#640023b9-70b9-4a07-8a6d-481e0d275d8b#${GITLAB_BACKUP_BUCKET}#g" \
+            /opt/docker/etc/gitlab.rb | docker \
+            container \
+            run \
+            --interactive \
+            --rm \
+            --mount type=volume,source=gitlab-config,destination=/etc/gitlab \
+            --workdir /etc/gitlab \
+            alpine:3.4 \
+                tee \
+                gitlab.rb
+fi

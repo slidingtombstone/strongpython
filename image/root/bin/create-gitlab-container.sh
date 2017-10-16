@@ -3,6 +3,7 @@
 create-system-network &&
     create-private-network &&
     create-gitlab-config-volume &&
+    create-gitlab-backup-volume &&
     if [ ! -f ${HOME}/docker/containers/gitlab ]
     then
         docker \
