@@ -42,14 +42,15 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 $(cat ${HOME}/docker/containers/sshd) \
                     touch \ 
                     /root/.ssh/authorized_keys &&
-            docker \
-                container \
-                exec \
-                --interactive \
-                --tty \
-                --user root \
-                $(cat ${HOME}/docker/containers/sshd) \
-                    chmod \
-                    0600 \
-                    /root/.ssh/authorized_keys
+            # docker \
+            #     container \
+            #     exec \
+            #     --interactive \
+            #     --tty \
+            #     --user root \
+            #     $(cat ${HOME}/docker/containers/sshd) \
+            #         chmod \
+            #         0600 \
+            #         /root/.ssh/authorized_keys &&
+            true
     fi
