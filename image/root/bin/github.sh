@@ -36,5 +36,5 @@ export GROUP_NAME="${1}" &&
     docker container exec --interactive --tty $(cat ${CIDFILE}) chmod 0600 /home/user/.ssh/id_rsa /home/user/.ssh/known_hosts &&
     docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project remote add origin git@github.com:${GROUP_NAME}/${PROJECT_NAME}.git &&
     docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project remote add upstream git@github.com:${GROUP_NAME}/${PROJECT_NAME}.git &&
-    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project git remote set-url --push upstream no_push &&
-    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project git scratch
+    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project remote set-url --push upstream no_push &&
+    docker container exec --interactive --tty $(cat ${CIDFILE}) git -C /home/user/workspace/${PROJECT_NAME}/project scratch
