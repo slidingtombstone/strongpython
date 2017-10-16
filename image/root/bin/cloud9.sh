@@ -6,7 +6,6 @@ sshd &&
         container \
         create \
         --cidfile ${CIDFILE} \
-        --detach \
         --env WORKSPACE_NAME=${1} \
         --env USER_NAME \
         --env USER_EMAIL \
