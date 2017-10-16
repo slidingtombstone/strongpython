@@ -22,7 +22,7 @@ export GROUP_NAME="${1}" &&
         --env SSHD_PORT=${SSHD_PORT} \
         --env USER_NAME="${USER_NAME}" \
         --env USER_EMAIL="${USER_EMAIL}" \
-        --env MASTER_BRANCH="${MASTER_BRANCH}"
+        --env MASTER_BRANCH="${MASTER_BRANCH}" \
         slidingtombstone/developer:4c2ba7914649969517a2fa35417a7b78e9aff678 &&
     docker network connect --alias ${WORKSPACE_NAME} $(cat ${HOME}/docker/networks/system) $(cat ${CIDFILE}) &&
     docker network connect --alias ${WORKSPACE_NAME} entrypoint_default $(cat ${CIDFILE}) &&
