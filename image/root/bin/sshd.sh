@@ -38,6 +38,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 exec \
                 --interactive \
                 --tty \
+                --user root \
                 $(cat ${HOME}/docker/containers/sshd) \
                     touch \ 
                     /root/.ssh/authorized_keys &&
@@ -47,6 +48,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 exec \
                 --interactive \
                 --tty \
+                --user root \
                 $(cat ${HOME}/docker/containers/sshd) \
                     chmod \
                     0600 \
