@@ -42,7 +42,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                     /root/.ssh/authorized_keys &&
             docker \
                 container \
-                run \
+                exec \
                 --interactive \
                 --tty \
                 $(cat ${HOME}/docker/containers/sshd) \
