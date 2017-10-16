@@ -37,7 +37,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 exec \
                 --interactive \
                 --tty \
-                alpine:3.4 \
+                $(cat ${HOME}/docker/containers/sshd) \
                     touch \ 
                     /root/.ssh/authorized_keys &&
             docker \
@@ -45,7 +45,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 run \
                 --interactive \
                 --tty \
-                alpine:3.4 \
+                $(cat ${HOME}/docker/containers/sshd) \
                     chmod \
                     0600 \
                     /root/.ssh/authorized_keys
