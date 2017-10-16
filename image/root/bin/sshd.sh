@@ -27,7 +27,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 --interactive \
                 --tty \
                 --rm \
-                --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_config),destination=/root/.ssh \
+                --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_dot_ssh),destination=/root/.ssh \
                 --workdir /root/.ssh \
                 alpine:3.4 \
                     touch \
@@ -38,7 +38,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 --interactive \
                 --tty \
                 --rm \
-                --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_config),destination=/root/.ssh \
+                --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_dot_ssh),destination=/root/.ssh \
                 --workdir /root/.ssh \
                 alpine:3.4 \
                     chmod \
