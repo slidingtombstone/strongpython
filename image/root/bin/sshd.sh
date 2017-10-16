@@ -18,33 +18,6 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 alpine:3.4 \
                     tee sshd_config
     fi &&
-    if [ ! -f ${HOME}/docker/volumes/sshd_dot_ssh ]
-    then
-        docker volume create > ${HOME}/docker/volumes/sshd_dot_ssh &&
-            docker \
-                container \
-                run \
-                --interactive \
-                --tty \
-                --rm \
-                --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_dot_ssh),destination=/root/.ssh \
-                --workdir /root/.ssh \
-                alpine:3.4 \
-                    touch \
-                    authorized_keys &&
-            docker \
-                container \
-                run \
-                --interactive \
-                --tty \
-                --rm \
-                --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_dot_ssh),destination=/root/.ssh \
-                --workdir /root/.ssh \
-                alpine:3.4 \
-                    chmod \
-                    0600 \
-                    authorized_keys
-    fi &&
     if [ ! -f ${HOME}/docker/containers/sshd ]
     then
         docker \
@@ -59,5 +32,22 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 -D \
                 -f /etc/ssh/sshd_config &&
             docker network connect --alias sshd $(cat ${HOME}/docker/networks/system) $(cat ${HOME}/docker/containers/sshd) &&
-            docker container start $(cat ${HOME}/docker/containers/sshd)
+            docker container start $(cat ${HOME}/docker/containers/sshd) &&
+            docker \
+                container \
+                exec \
+                --interactive \
+                --tty \
+                alpine:3.4 \
+                    touch \ 
+                    /root/.ssh/authorized_keys &&
+            docker \
+                container \
+                run \
+                --interactive \
+                --tty \
+                alpine:3.4 \
+                    chmod \
+                    0600 \
+                    /root/.ssh/authorized_keys
     fi
