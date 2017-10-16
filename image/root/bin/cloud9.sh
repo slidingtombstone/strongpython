@@ -16,9 +16,9 @@ sshd &&
         --cidfile ${CIDFILE} \
         --env WORKSPACE_NAME=${1} \
         --env SSHD_CONTAINER=$(cat ${HOME}/docker/containers/sshd) \
-        --env SSHD_PORT \
-        --env USER_NAME \
-        --env USER_EMAIL \
+        --env SSHD_PORT=${SSHD_PORT} \
+        --env USER_NAME="${USER_NAME}" \
+        --env USER_EMAIL="${USER_EMAIL}" \
         slidingtombstone/developer:4c2ba7914649969517a2fa35417a7b78e9aff678 &&
     docker network connect --alias ${1} $(cat ${HOME}/docker/networks/system) $(cat ${CIDFILE}) &&
     docker network connect --alias ${1} entrypoint_default $(cat ${CIDFILE}) &&
