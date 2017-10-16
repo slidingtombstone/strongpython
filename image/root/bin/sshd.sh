@@ -40,6 +40,25 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 --tty \
                 --user root \
                 $(cat ${HOME}/docker/containers/sshd) \
+                    mkdir \ 
+                    /root/.ssh &&
+            docker \
+                container \
+                exec \
+                --interactive \
+                --tty \
+                --user root \
+                $(cat ${HOME}/docker/containers/sshd) \
+                    chown \
+                    0700 \
+                    /root/.ssh &&
+            docker \
+                container \
+                exec \
+                --interactive \
+                --tty \
+                --user root \
+                $(cat ${HOME}/docker/containers/sshd) \
                     touch \ 
                     /root/.ssh/authorized_keys &&
             echo ALPHA 00200 &&
