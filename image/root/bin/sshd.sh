@@ -26,7 +26,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
             --restart always \
             --cidfile ${HOME}/docker/containers/sshd \
             --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_config),destination=/etc/ssh \
-            panubo/sshd:14.04 \
+            panubo/sshd \
                 /usr/sbin/sshd \
                 -D \
                 -f /etc/ssh/sshd_config &&
