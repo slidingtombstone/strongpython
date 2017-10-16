@@ -32,7 +32,7 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 -f /etc/ssh/sshd_config &&
             docker network connect --alias sshd $(cat ${HOME}/docker/networks/system) $(cat ${HOME}/docker/containers/sshd) &&
             docker container start $(cat ${HOME}/docker/containers/sshd) &&
-            echo ALPHA 00300 &&
+            sleep 10s &&
             docker \
                 container \
                 exec \
@@ -42,7 +42,6 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
                 $(cat ${HOME}/docker/containers/sshd) \
                     touch \ 
                     /root/.ssh/authorized_keys &&
-            echo ALPHA 00400 &&
             docker \
                 container \
                 exec \
