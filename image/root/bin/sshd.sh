@@ -55,7 +55,6 @@ if [ ! -f ${HOME}/docker/volumes/sshd_config ]
             --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_config),destination=/etc/ssh \
             --mount type=volume,source=$(cat ${HOME}/docker/volumes/sshd_dot_ssh),destination=/root/.ssh \
             rastasheep/ubuntu-sshd:14.04 \
-                /entry.sh \
                 /usr/sbin/sshd \
                 -D \
                 -f /etc/ssh/sshd_config &&
